@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "ite-ecommerce"
+    }
+  },
+  "defaultProject": "ite-ecommerce",
+  "cli": {
+    "analytics": false
+  }
 }
