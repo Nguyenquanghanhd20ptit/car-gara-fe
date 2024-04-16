@@ -36,9 +36,6 @@ export class PaymentDetailComponent implements OnInit {
     })
   }
   paymentInCash(){
-
-  }
-  paymentWithMomo(){
     this.orderService.updateStatusOrderIsSuccess(this.order.id).subscribe((data)=>{
       if(data.errorCode && data.errorCode === "00"){
         this.router.navigateByUrl("/admin/booking")
@@ -49,4 +46,7 @@ export class PaymentDetailComponent implements OnInit {
       }
     })
   }
+  paymentWithMomo(){
+  }
+  
 }

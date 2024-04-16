@@ -8,7 +8,14 @@
                         <div class="ant-space-item"><span>Tổng đơn hàng
                                 (đơn)</span></div>
                     </div>
-                    <div class="ant-statistic-content"><span class="ant-statistic-content-value">200</span></div>
+                    <div class="ant-statistic-content"><span class="ant-statistic-content-value">{{totalOrder}}</span></div>
+                </div>
+                <div class="ant-statistic">
+                    <div class="ant-statistic-title">
+                        <div class="ant-space-item"><span>Tổng khách hàng
+                                (khách)</span></div>
+                    </div>
+                    <div class="ant-statistic-content"><span class="ant-statistic-content-value">{{totalCustomer}}</span></div>
                 </div>
                 <div class="ant-col">
                     <div class="ant-statistic">
@@ -16,7 +23,7 @@
                             <div class="ant-space-item"><span>Tổng doanh thu (VNĐ)</span></div>
                         </div>
                         <div class="ant-statistic-content"><span
-                                class="ant-statistic-content-value"><span>4,342,110,000</span></span></div>
+                                class="ant-statistic-content-value"><span>{{totalRevenue.toLocaleString("vi-VN")}} VNĐ</span></span></div>
                     </div>
                 </div>
             </div>
@@ -24,24 +31,35 @@
     </div>
     <main class="table" id="customers_table">
         <section class="table__header">
-            <form id="timeForm" class="time-form">
-                <div style="margin-right: 20px;">
-                <div class=" timeForm-lable">
-                    <label class="timeForm-title" for="startDatePicker">Ngày Bắt Đầu:</label>
-                    <input type="text" id="startDatePicker" class="date-input" placeholder="Chọn ngày bắt đầu" />
-                    <input type="hidden" id="startTime" name="startTime" />
+            <form [formGroup]="timeForm" (ngSubmit)="searchBetweenTime()">
+                <div>
+                  <div class="timeForm-lable">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Ngày Bắt Đầu</mat-label>
+                      <input matInput [matDatepicker]="startDatePicker" placeholder="Chọn ngày bắt đầu" formControlName="startDate"
+                             [value]="timeForm.get('startDate').value">
+                      <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+                      <mat-datepicker #startDatePicker></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                  <div class="timeForm-lable">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Ngày Kết Thúc</mat-label>
+                      <input matInput [matDatepicker]="endDatePicker" placeholder="Chọn ngày kết thúc" formControlName="endDate" 
+                             [min]="timeForm.get('startDate').value" [disabled]="!timeForm.get('startDate').value"
+                             [value]="this.timeForm.get('endDate').value">
+                      <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+                      <mat-datepicker #endDatePicker></mat-datepicker>
+                    </mat-form-field>
+                  </div>
                 </div>
-                <div  class=" timeForm-lable">
-                    <label  class="timeForm-title" for="endDatePicker">Ngày Kết Thúc:</label>
-                    <input type="text" id="endDatePicker" class="date-input" placeholder="Chọn ngày kết thúc" />
-                    <input type="hidden" id="endTime" name="endTime" />
-                </div>
-            </div>
-               <div> <input class="time-form-button" type="submit" value="Tìm kiếm" /></div> 
-            </form>
-
-            <div class="input-group">
-                <input type="search" placeholder="Search Data...">
+                <div><button class="time-form-button" [disabled]="!timeForm.valid" type="submit">Tìm kiếm</button></div>
+              </form>
+              
+              
+              <div class="input-group">
+                <input type="search" [(ngModel)]="searchValue" (ngModelChange)="onSearchChange()"
+                    placeholder="Search Data...">
                 <i style="font-size: 20px;" class="fa-solid fa-magnifying-glass"></i>
             </div>
         </section>
@@ -53,27 +71,26 @@
                         <th> Họ và Tên</th>
                         <th> Email </th>
                         <th> Số điện thoại </th>
-                        <th> Địa chỉ </th>
+                        <th> Số lần sửa xe </th>
                         <th> Tùy chọn </th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let customer of customers">
-                        <td>{{ customer.id}}</td>
-                        <td><img src="../../../assets/images/Facebook-Avatar_3.png" alt="">{{ customer.name }}</td>
-                        <td>{{ customer.phone }}</td>
-                        <td>{{ customer.email }}</td>
-                        <td>{{ customer.address }}</td>
+                    <tr *ngFor="let statistic of statistics; let i = index">
+                        <td>{{ i}}</td>
+                        <td><img src="../../../assets/images/Facebook-Avatar_3.png" alt="">{{ statistic.name }}</td>
+                        <td>{{ statistic.phone }}</td>
+                        <td>{{ statistic.email }}</td>
+                        <td>{{ statistic.numCorrection }}</td>
+                        <td>{{ statistic.totalPrice.toLocaleString("vi-VN") }} {{statistic.currency}}</td>
                         <td>
-                            <div class="action-menu" (click)="toggleMenu(customer.id)">
+                            <div class="action-menu" (click)="toggleMenu(statistic.customerId)">
                                 <button class="action-button" data-household-id="${household.id}">
                                     <i class="fas fa-cogs"></i>
                                 </button>
-                                <div class="menu-content" [ngClass]="{'open-menu': openMenu[customer.id]}">
-                                    <button class="menu-content-button" (click)="edit(customer.id)"><i
-                                            class="fas fa-pencil-alt"></i> Sửa</button>
-                                    <button class="menu-content-button" (click)="deleteItem(customer.id)"><i
-                                            class="fas fa-trash"></i> Xóa</button>
+                                <div class="menu-content" [ngClass]="{'open-menu': openMenu[statistic.customerId]}">
+                                    <button class="menu-content-button" (click)="edit(statistic.customerId)"><i
+                                            class="fas fa-pencil-alt"></i> Xem chi tiết</button>
                                 </div>
                             </div>
                         </td>
@@ -81,15 +98,16 @@
                 </tbody>
             </table>
             <div class="store-filter clearfix">
-                <span class="store-qty">Hiển thị {{ (currentPage - 1) * pageSize + 1 }} - {{ (currentPage * pageSize) <
-                        total ? currentPage * pageSize : total }} khách hàng trong tổng số {{ total }} kết quả</span>
-                        <ul class="store-pagination">
-                            <li *ngFor="let page of getPageNumbers()" [class.active]="currentPage === page"
-                                (click)="changePage(page)">
-                                <a>{{ page }}</a>
-                            </li>
-                        </ul>
-            </div>
+                <span class="store-qty" *ngIf="statistics && statistics.length > 0">
+                  Hiển thị {{ (currentPage - 1) * pageSize + 1 }} - 
+                  {{ (currentPage * pageSize) < totalCustomer ? currentPage * pageSize : totalCustomer }} 
+                  khách hàng trong tổng số {{ totalCustomer }} kết quả
+                </span>
+                <span class="store-qty" *ngIf="!statistics || statistics.length === 0">
+                  Khách hàng trong tổng số {{totalCustomer}} kết quả
+                </span>
+              </div>
+              
         </section>
     </main>
 </body>

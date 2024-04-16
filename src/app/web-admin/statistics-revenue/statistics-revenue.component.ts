@@ -1,66 +1,97 @@
+import { DatePipe } from '@angular/common';
 import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { StatisticService } from 'src/app/core/service/app/statistic/statistic.service';
 
 @Component({
   selector: 'app-statistics-revenue',
   templateUrl: './statistics-revenue.component.html',
-  styleUrls: ['./statistics-revenue.component.scss']
+  styleUrls: ['./statistics-revenue.component.scss'],
 })
 export class StatisticsRevenueComponent implements OnInit {
 
-  public total: number;
-  public numColumes = 4;
+  public timeForm: FormGroup;
+  public totalCustomer = 0;
+  public totalOrder = 0;
+  public totalRevenue = 0;
   public currentPage = 1;
   public pageSize = 8;
-  public customers: any;
+  public statistics: any;
+  public searchValue;
+  private searchTimeout: any;
   public openMenu: { [key: number]: boolean } = {};
-  constructor(private elementRef: ElementRef) { } 
+  constructor(private elementRef: ElementRef,
+    private statisticService : StatisticService,
+    private toastr : ToastrService,
+    public datePipe: DatePipe,
+    private formBuilder: FormBuilder) { } 
 
+  
   ngOnInit() {
-    this.customers = [
-      { 
-        id : 1,
-        name: "Nguyễn Quang Hạnh", 
-        phone: "0383870219", 
-        email: "hanhd20ptit@gmail.com", 
-        address: "Ba vì - Hà nội" 
-      }, { 
-        id : 2,
-        name: "Nguyễn Quang Hạnh", 
-        phone: "0383870219", 
-        email: "hanhd20ptit@gmail.com", 
-        address: "Ba vì - Hà nội" 
-      }, { 
-        id : 3,
-        name: "Nguyễn Quang Hạnh", 
-        phone: "0383870219", 
-        email: "hanhd20ptit@gmail.com", 
-        address: "Ba vì - Hà nội" 
-      }, { 
-        id : 4,
-        name: "Nguyễn Quang Hạnh", 
-        phone: "0383870219", 
-        email: "hanhd20ptit@gmail.com", 
-        address: "Ba vì - Hà nội" 
-      }, { 
-        id : 5,
-        name: "Nguyễn Quang Hạnh", 
-        phone: "0383870219", 
-        email: "hanhd20ptit@gmail.com", 
-        address: "Ba vì - Hà nội" 
-      },
-    ];
-    this.customers.forEach(customer => {
+    this.timeForm = this.formBuilder.group({
+      startDate: ['', Validators.required],
+      endDate: ['', Validators.required]
+    });
+    this.searchBetweenTime();
+    this.statistics.forEach(customer => {
       this.openMenu[customer.id] = false;
     });
-    this.total = 20;
   }
 
+  searchBetweenTime() {
+    console.log(this.datePipe.transform(this.timeForm.get('endDate').value, 'yyyy-MM-dd'));
+    let body = {
+      "keyword": this.searchValue,
+      "filters": [{"name":"status","value":0,"operation":"eq"}],
+      "pageable": {
+        "page": this.currentPage,
+        "page_size": this.pageSize,
+        "sort": [
+          { "property": "id", "direction": "asc" }
+        ]
+      }
+    };
+  
+    const startDate = this.timeForm.get("startDate").value;
+    const endDate = this.timeForm.get("endDate").value;
+  
+    if (startDate && endDate) {
+      body["filters"] = [
+        { "name": "createdAt", "value": startDate.getTime(), "operation": "gt" },
+        { "name": "createdAt", "value": endDate.getTime(), "operation": "lt" },
+        {"name":"status","value":0,"operation":"eq"}
+      ];
+    }
+  
+    this.statisticService.statisticRevenue(body).subscribe((data: any) => {
+      if (data && data.errorCode === "00") {
+        let pageResponse = JSON.parse(data.data);
+        this.totalCustomer = pageResponse.totalOrder;
+        this.totalOrder = pageResponse.totalOrder;
+        this.totalRevenue = pageResponse.totalRevenue;
+        this.statistics = pageResponse.items;
+      } else if (data && data.errorMessage) {
+        this.statistics.error(data.errorMessage);
+      } else {
+        this.toastr.error("Đã có lỗi sảy ra");
+      }
+    });
+  }
+
+
+  onSearchChange() {
+    clearTimeout(this.searchTimeout); 
+    this.searchTimeout = setTimeout(() => {
+      this.searchBetweenTime();
+    }, 500);
+  }
   changePage(page: number) {
     this.currentPage = page;
   }
   
   getPageNumbers(): number[] {
-    const pageCount = Math.ceil(this.total / this.pageSize);
+    const pageCount = Math.ceil(this.totalCustomer / this.pageSize);
     return Array.from({ length: pageCount }, (_, i) => i + 1);
   }
 
@@ -76,17 +107,17 @@ export class StatisticsRevenueComponent implements OnInit {
     });
   
     if (!isMenuClicked) {
-      this.customers.forEach(customer => {
-        this.openMenu[customer.id] = false;
+      this.statistics.forEach(statistic => {
+        this.openMenu[statistic.customerId] = false;
       });
     }
   }
   
   
   toggleMenu(index) {
-    this.customers.forEach(customer => {
-      if(customer.id !== index){
-        this.openMenu[customer.id] = false;
+    this.statistics.forEach(statistic => {
+      if(statistic.customerId !== index){
+        this.openMenu[statistic.customerId] = false;
       }
     });
     this.openMenu[index] = !this.openMenu[index];

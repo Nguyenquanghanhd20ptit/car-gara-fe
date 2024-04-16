@@ -85,6 +85,7 @@ export class PaymentComponent implements OnInit {
         this.services.push(service);
       }
       this.toastr.success(type);
+      this.updateTotalPrice();
     }
   }
 
@@ -154,6 +155,7 @@ export class PaymentComponent implements OnInit {
           this.accessorys[i].totalPrice = totalPrice;
         }
       }
+      this.updateTotalPrice();
     }
 
     deleteItemAccessory(index: number) {

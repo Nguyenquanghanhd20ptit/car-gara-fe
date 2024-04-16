@@ -11,6 +11,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { SharedModule } from './shared/shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ConfigService } from './core/service/configuration/configuration.service';
+import { DatePipe } from '@angular/common';
 
 export const configFactory = (configService: ConfigService) => {
   return () => configService.loadConfig();
@@ -39,6 +40,7 @@ export const configFactory = (configService: ConfigService) => {
       deps: [ConfigService],
       multi: true
     },
+    DatePipe,
     AuthGuardService
   ],
   exports : [],
