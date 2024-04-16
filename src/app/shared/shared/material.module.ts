@@ -42,6 +42,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 const MODULES = [
   A11yModule,
@@ -59,6 +60,7 @@ const MODULES = [
   MatChipsModule,
   MatStepperModule,
   MatDatepickerModule,
+  MatFormFieldModule,
   MatDialogModule,
   MatDividerModule,
   MatExpansionModule,

@@ -1,0 +1,130 @@
+
+<div class="container" [ngClass]="{'container-none': isDialogOpen}">
+    <h1 class="cart-title">Tạo Hóa đơn</h1>
+    <div class="back-previous-container">
+        <p class="back-previous-title">Tạo hóa đơn thanh toán cho khách hàng: {{booking.customer.name}}</p>
+        <button type="submit" class="submit-button"><i class="fa-solid fa-arrow-right"></i>  <a href="/admin/booking">     Tiếp tục tạo hóa đơn</a></button>
+    </div>
+    <br> <br>
+    <div class="booking-info">
+         <div> <img src="{{booking.customer.avatarUrl}}" alt="Logo"></div>
+        <div>
+        <p class="booking-info-title">Tên khách hàng: {{booking.customer.name}}</p>
+        <p class="booking-info-title"> Số điện thoại:  {{booking.customer.phoneNumber}}</p>
+        <p class="booking-info-title"> Email:  {{booking.customer.email}}</p>
+        <p class="booking-info-title"> Tên xe:  {{booking.car.name}}</p>
+        <p class="booking-info-title"> Biển số xe:  {{booking.car.licensePlates}}</p>
+        <p class="booking-info-title"> Địa chỉ :  {{booking.customer.address}}</p>
+        <p class="booking-info-title"> yêu cầu: {{booking.conditionDes}}</p>
+        <p class="booking-info-title"> Ngày đặt lịch:  {{booking.appointmentTime}}</p>
+    </div>
+    </div>
+    <div class="div-button-add">
+        <div> <p class="product-count">Bạn đã chọn {{services.length}} dịch vụ</p></div>
+    <div class="submit-add">
+        <button type="submit" class="submit-button-add" (click)="chooseNewService()"> <span>Chọn dịch vụ</span></button>
+    </div>
+    </div>
+    <div class="shopping-cart-wrapper">
+        <div class="product-cart-box">
+            <div class="product-in-cart">
+                <table>
+                    <colgroup>
+                        <col style="width: 150px;">
+                        <col style="width: 150px;">
+                        <col style="width: 150px;">
+                        <col style="width: 100px;">
+                        <col style="width: 60px;">
+                    </colgroup>
+                    <thead class="ant-table-thead">
+                        <tr>
+                            <th class="ant-table-cell"></th>
+                            <th class="ant-table-cell">Tên dịch vụ</th>
+                            <th class="ant-table-cell">Loại dịch vụ</th>
+                            <th class="ant-table-cell">số tiền</th>
+                        </tr>
+                    </thead>
+                    <tbody class="ant-table-tbody">
+                        <tr class="ant-table-row" *ngFor="let service of services; let i = index">
+                              <td class="ant-table-cell"><span><img [src]="service.imageUrl"></span></td>
+                              <td class="ant-table-cell"><a class="table-cell-nameProduct">{{service.name}}</a></td>
+                              <td class="ant-table-cell"><a class="table-cell-nameProduct" >{{service.type}}</a></td>
+                              <td class="ant-table-cell">{{ service.price.toLocaleString('vi-VN') }} {{service.currency}}</td>
+                              <td class="ant-table-cell"> <button type="button" (click)="deleteItemService(i)" class="cart-delete-button"><i class="fa-solid fa-trash"></i></button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <br><br>
+        <div class="div-button-add">
+            <div> <p class="product-count">Bạn đã chọn {{accessorys.length}} phụ kiện</p></div>
+        <div class="submit-add">
+            <button class="submit-button-add" (click)="chooseNewAccessory()"> <span>Chọn phụ kiện</span></button>
+        </div>
+        </div>
+        <div class="product-cart-box">
+            <div class="product-in-cart">
+                <table>
+                    <colgroup>
+                        <col style="width: 150px;">
+                        <col style="width: 200px;">
+                        <col style="width: 100px;">
+                        <col style="width: 100px;">
+                        <col style="width: 100px;">
+                        <col style="width: 60px;">
+                    </colgroup>
+                    <thead class="ant-table-thead">
+                        <tr>
+                            <th class="ant-table-cell"></th>
+                            <th class="ant-table-cell">Sản phẩm</th>
+                            <th class="ant-table-cell">đơn giá</th>
+                            <th class="ant-table-cell">số lượng</th>
+                            <th class="ant-table-cell">số tiền</th>
+                            <th class="ant-table-cell"></th>
+                        </tr>
+                    </thead>
+                    <tbody class="ant-table-tbody">
+                        <tr class="ant-table-row" *ngFor="let accessory of accessorys; let i = index">
+                              <td class="ant-table-cell"><span><img [src]="accessory.imageUrl"></span></td>
+                              <td class="ant-table-cell"><a class="table-cell-nameProduct" href="/product">{{accessory.name}}</a></td>
+                              <td class="ant-table-cell">{{ accessory.price.toLocaleString('vi-VN') }} {{accessory.currency}}</td>
+                              <td class="ant-table-cell">
+                                <div class="quanty-label">
+                                    <div class="input-number">
+                                        <input type="number" [value]="quantityAccessory[i]" [(ngModel)]="quantityAccessory[i]" [min]="1" [max]="accessory.quantity" 
+                                        (change)="updatePaymentNum(i,accessory.quantity)" >
+                                        <span class="qty-up" (click)="quantyUp(i,accessory.quantity)">+</span>
+                                        <span class="qty-down" (click)="quantyDown(i)">-</span>
+                                    </div>
+                            </div></td>
+                              <td class="ant-table-cell ant-table-totalMoney">{{ accessory.totalPrice.toLocaleString('vi-VN') }} {{accessory.currency}}</td>
+                              <td class="ant-table-cell"> <button type="button" class="cart-delete-button" (click)="deleteItemAccessory(i)"><i class="fa-solid fa-trash"></i></button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="detail-payment">
+            <div class="total-payment">
+                <h2>Chi tiết thanh toán</h2>
+                <div class="total-price display-align">
+                    <div><span>Tổng tiền hàng</span></div>
+                    <div><span>{{totalPrice.toLocaleString("vi-VN")}} VNĐ</span></div>
+                </div>
+                <div class="total-price display-align">
+                    <div><span>Tổng coupon giảm giá</span></div>
+                    <div><span>0 VNĐ</span></div>
+                </div>
+                <div class="ant-divider-horizontal"></div>
+                <div class="totalPayment-total-money display-align">
+                    <span >TỔNG THANH TOÁN: </span>
+                    <span class="totalPayment-total-money-right">{{totalPrice.toLocaleString("vi-VN")}} VNĐ</span>
+                </div>
+            </div>
+        </div>
+        <div class="submit-buy">
+            <button type="submit" class="submit-button-buy" (click)="createInvoice()"><a href=""> <span>Tạo hóa đơn</span></a></button>
+        </div>
+    </div>  
+</div>

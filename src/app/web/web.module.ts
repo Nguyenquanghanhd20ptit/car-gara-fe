@@ -6,13 +6,7 @@ import { TitleConstants } from '../core/constants/title.constants';
 import { CoreModule } from '../core/core.module';
 import { SharedModule } from '../shared/shared/shared.module';
 
-const defaultUrl = "home";
 const routers : Routes = [
-  {
-    path : "",
-    redirectTo : defaultUrl,
-    pathMatch : "full"
-  },
   {
     path : "home",
     component : HomeComponent,

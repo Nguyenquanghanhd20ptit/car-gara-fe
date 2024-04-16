@@ -1,0 +1,28 @@
+<div >
+    <h2 class="booking-info" style="margin-top: 10px;">Chi tiết booking</h2>
+    <div class="booking-info">
+        <div> <img src="{{booking.customer.avatarUrl}}" alt="Logo"></div>
+        <div>
+            <p class="booking-info-title">Tên khách hàng: {{booking.customer.name}}</p>
+            <p class="booking-info-title"> Số điện thoại: {{booking.customer.phoneNumber}}</p>
+            <p class="booking-info-title"> Email: {{booking.customer.email}}</p>
+            <p class="booking-info-title"> Địa chỉ : {{booking.customer.address}}</p>
+            <p class="booking-info-title"> Vị trí: {{booking.slotName}}</p>
+            <p class="booking-info-title"> Ngày đặt lịch: {{booking.appointmentTime}}</p>
+            <p class="booking-info-title"> yêu cầu: {{booking.conditionDes}}</p>
+        </div>
+    </div>
+
+    <div class="booking-info">
+        <div> <img src="{{booking.car.imageUrl}}" alt="Logo"></div>
+        <div>
+            <p class="booking-info-title">Tên xe: {{booking.car.name}}</p>
+            <p class="booking-info-title"> Biển số xe: {{booking.car.licensePlates}}</p>
+            <p class="booking-info-title"> Trạng thái: {{booking.car.status}}</p>
+        </div>
+    </div>
+
+    <div class="submit-buy">
+        <button type="submit" class="submit-button-buy" (click)="navigateURl()"><a href=""> <span>Tạo hóa đơn</span></a></button>
+    </div>
+</div>

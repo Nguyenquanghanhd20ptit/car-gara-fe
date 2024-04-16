@@ -1,0 +1,52 @@
+<body >
+    <main class="table" id="customers_table">
+        <section class="table__header">
+            <h1>Quản lý khách hàng</h1>
+            <div class="input-group">
+            <input type="search" [(ngModel)]="searchValue" (ngModelChange)="onSearchChange()" placeholder="Search Data...">
+            <i style="font-size: 20px;" class="fa-solid fa-magnifying-glass"></i>
+          </div>
+        </section>
+        <section class="table__body">
+            <table>
+                <thead>
+                    <tr>
+                        <th> STT</th>
+                        <th> Tên xe</th>
+                        <th> Tên chủ sở hữu </th>
+                        <th> Biển số xe </th>
+                        <th> Trạng thái </th>
+                        <th> Tùy chọn </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let car of cars">
+                        <td>{{ car.id}}</td>
+                        <td><img src="{{car.imageUrl}}" alt="">{{ car.name }}</td>
+                        <td>{{ car.customer.name }}</td>
+                        <td>{{ car.licensePlates }}</td>
+                        <td>{{ car.status }}</td>
+                        <td><div class="action-menu" (click)="toggleMenu(car.id)">
+                            <button class="action-button" data-household-id="${household.id}">
+                                <i class="fas fa-cogs"></i>
+                            </button>
+                          <div class="menu-content"  [ngClass]="{'open-menu': openMenu[car.id]}">
+                            <button class="menu-content-button" (click)="edit(car.id)"><i class="fas fa-pencil-alt"></i> Sửa</button>
+                            <button class="menu-content-button" (click)="deleteItem(car.id)"><i class="fas fa-trash"></i> Xóa</button>
+                        </div>
+                        </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="store-filter clearfix">
+                <span class="store-qty">Hiển thị {{ (currentPage - 1) * pageSize + 1 }} - {{ (currentPage * pageSize) < total ? currentPage * pageSize : total }} khách hàng trong tổng số {{ total }} kết quả</span>
+                <ul class="store-pagination">
+                    <li *ngFor="let page of getPageNumbers()" [class.active]="currentPage === page" (click)="changePage(page)">
+                        <a >{{ page }}</a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </main>
+</body>

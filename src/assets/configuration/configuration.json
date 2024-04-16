@@ -1,0 +1,8 @@
+{
+    "API_ENDPOINTS" : {
+        "NO_AUTH_API_URL" : "http://localhost:8080/car-management",
+        "AUTH_API_URL": "http://localhost:8080/car-management",
+        "SKIP_LOADER": "Skip-Loader"
+    },
+    "IGNORE_API" : ["ite-ecommerce/upload/images"]
+}

@@ -1,0 +1,117 @@
+
+<div class="container" >
+    <h1 class="cart-title">Chi tiết Hóa đơn</h1>
+    <div class="back-previous-container">
+        <p class="back-previous-title">Chi tiết hóa đơn của khác hàng: {{order.booking.customer.name}}</p>
+        <button type="submit" class="submit-button"><i class="fa-solid fa-arrow-right"></i>  <a href="/admin/booking"> Tiếp tục tạo hóa đơn</a></button>
+    </div>
+    <br> <br>
+    <div class="booking-info">
+         <div> <img src="{{order.customer.avatarUrl}}" alt="Logo"></div>
+        <div>
+        <p class="booking-info-title">Tên khách hàng: {{order.customer.name}}</p>
+        <p class="booking-info-title"> Số điện thoại:  {{order.customer.phoneNumber}}</p>
+        <p class="booking-info-title"> Email:  {{order.customer.email}}</p>
+        <p class="booking-info-title"> Tên xe:  {{order.booking.car.name}}</p>
+        <p class="booking-info-title"> Biển số xe:  {{order.booking.car.licensePlates}}</p>
+        <p class="booking-info-title"> Địa chỉ :  {{order.customer.address}}</p>
+        <p class="booking-info-title"> yêu cầu: {{order.booking.conditionDes}}</p>
+        <p class="booking-info-title"> Ngày đặt lịch:  {{order.booking.appointmentTime}}</p>
+        <p class="booking-info-title"> Trạng thái đơn hàng:  {{order.status}}</p>
+    </div>
+    </div>
+    <div class="div-button-add">
+        <div> <p class="product-count">Bạn đã sử dụng {{order.serviceOrders.length}} dịch vụ</p></div>
+    </div>
+    <div class="shopping-cart-wrapper">
+        <div class="product-cart-box">
+            <div class="product-in-cart">
+                <table>
+                    <colgroup>
+                        <col style="width: 150px;">
+                        <col style="width: 150px;">
+                        <col style="width: 150px;">
+                        <col style="width: 100px;">
+                        <col style="width: 60px;">
+                    </colgroup>
+                    <thead class="ant-table-thead">
+                        <tr>
+                            <th class="ant-table-cell"></th>
+                            <th class="ant-table-cell">Tên dịch vụ</th>
+                            <th class="ant-table-cell">Loại dịch vụ</th>
+                            <th class="ant-table-cell">số tiền</th>
+                        </tr>
+                    </thead>
+                    <tbody class="ant-table-tbody">
+                        <tr class="ant-table-row" *ngFor="let serviceOrder of order.serviceOrders; let i = index">
+                              <td class="ant-table-cell"><span><img [src]="serviceOrder.service.imageUrl"></span></td>
+                              <td class="ant-table-cell"><a class="table-cell-nameProduct">{{serviceOrder.service.name}}</a></td>
+                              <td class="ant-table-cell"><a class="table-cell-nameProduct" >{{serviceOrder.service.type}}</a></td>
+                              <td class="ant-table-cell">{{ serviceOrder.service.price.toLocaleString('vi-VN') }} {{serviceOrder.service.currency}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <br><br>
+        <div class="div-button-add">
+            <div> <p class="product-count">Bạn đã thay {{order.accessoryOrders.length}} phụ kiện</p></div>
+        </div>
+        <div class="product-cart-box">
+            <div class="product-in-cart">
+                <table>
+                    <colgroup>
+                        <col style="width: 150px;">
+                        <col style="width: 200px;">
+                        <col style="width: 100px;">
+                        <col style="width: 100px;">
+                        <col style="width: 100px;">
+                        <col style="width: 60px;">
+                    </colgroup>
+                    <thead class="ant-table-thead">
+                        <tr>
+                            <th class="ant-table-cell"></th>
+                            <th class="ant-table-cell">Sản phẩm</th>
+                            <th class="ant-table-cell">đơn giá</th>
+                            <th class="ant-table-cell">số lượng</th>
+                            <th class="ant-table-cell">số tiền</th>
+                            <th class="ant-table-cell"></th>
+                        </tr>
+                    </thead>
+                    <tbody class="ant-table-tbody">
+                        <tr class="ant-table-row" *ngFor="let accessoryOrder of order.accessoryOrders; let i = index">
+                              <td class="ant-table-cell"><span><img [src]="accessoryOrder.accessory.imageUrl"></span></td>
+                              <td class="ant-table-cell"><a class="table-cell-nameProduct" href="/product">{{accessoryOrder.accessory.name}}</a></td>
+                              <td class="ant-table-cell">{{ accessoryOrder.accessory.price.toLocaleString('vi-VN') }} {{accessoryOrder.accessory.currency}}</td>
+                              <td class="ant-table-cell"> {{accessoryOrder.quantity}}</td>
+                              <td class="ant-table-cell ant-table-totalMoney">{{ accessoryOrder.totalPrice.toLocaleString('vi-VN') }} {{accessoryOrder.currency}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="detail-payment">
+            <div class="total-payment">
+                <h2>Tổng số tiền phải thanh toán</h2>
+                <div class="total-price display-align">
+                    <div><span>Tổng tiền hàng</span></div>
+                    <div><span>{{order.totalPrice.toLocaleString("vi-VN")}} VNĐ</span></div>
+                </div>
+                <div class="total-price display-align">
+                    <div><span>Tổng coupon giảm giá</span></div>
+                    <div><span>0 VNĐ</span></div>
+                </div>
+                <div class="ant-divider-horizontal"></div>
+                <div class="totalPayment-total-money display-align">
+                    <span >TỔNG THANH TOÁN: </span>
+                    <span class="totalPayment-total-money-right">{{order.totalPrice.toLocaleString("vi-VN")}} VNĐ</span>
+                </div>
+            </div>
+        </div>
+        <div class="submit-buy">
+            <button type="submit" class="submit-button-buy" (click)="paymentInCash()"><a href=""> <span>Thanh toán bằng tiền mặt</span></a></button>
+        </div>
+        <div class="submit-buy">
+            <button type="submit" class="submit-button-buy" (click)="paymentWithMomo()"><a href=""> <span>Thanh toán bằng momo</span></a></button>
+        </div>
+    </div>  

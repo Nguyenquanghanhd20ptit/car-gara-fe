@@ -1,0 +1,16 @@
+.container {
+    display: flex;
+  }
+  
+  .sidebar {
+    flex: 0 0 250px; 
+  }
+
+  .collapsed {
+    flex: 0 0 150px;
+  }
+  
+  .content {
+    flex: 1; 
+  }
+  

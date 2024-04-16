@@ -13,6 +13,15 @@ const routes: Routes = [
     data: { preload: true },
     resolve: {
     }
+  },
+  {
+    path : 'admin',
+    component : LayoutComponent,
+    canActivateChild : [AuthGuardService],
+    loadChildren : () => import('src/app/web-admin/web-admin.module').then(m => m.WebAdminModule),
+    data: { preload: true },
+    resolve: {
+    }
   }
 ];
 

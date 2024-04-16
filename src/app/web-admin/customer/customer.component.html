@@ -1,0 +1,58 @@
+<body >
+    <main class="table" id="customers_table">
+        <section class="table__header">
+            <h1>Quản lý khách hàng</h1>
+            <div class="input-group">
+              <input type="search" [(ngModel)]="searchValue" (ngModelChange)="onSearchChange()" placeholder="Search Data...">
+              <i style="font-size: 20px;" class="fa-solid fa-magnifying-glass"></i>
+            </div>
+          </section>
+        <div class="div-button-add">
+            <div> <p class="product-count"></p></div>
+        <div class="submit-add">
+            <button type="submit" class="submit-button-add" (click)="addNew()"> <span>Thêm mới khách hàng</span></button>
+        </div>
+        </div>
+        <section class="table__body">
+            <table>
+                <thead>
+                    <tr>
+                        <th> STT</th>
+                        <th> Họ và Tên</th>
+                        <th> Email </th>
+                        <th> Số điện thoại </th>
+                        <th> Địa chỉ </th>
+                        <th> Tùy chọn </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let customer of customers">
+                        <td>{{ customer.id}}</td>
+                        <td style="display: flex;"><img src="{{customer.avatarUrl}}" alt="">{{ customer.name }}</td>
+                        <td>{{ customer.phoneNumber }}</td>
+                        <td>{{ customer.email }}</td>
+                        <td>{{ customer.address }}</td>
+                        <td><div class="action-menu" (click)="toggleMenu(customer.id)">
+                            <button class="action-button" data-household-id="${household.id}">
+                                <i class="fas fa-cogs"></i>
+                            </button>
+                          <div class="menu-content"  [ngClass]="{'open-menu': openMenu[customer.id]}">
+                            <button class="menu-content-button" (click)="edit(customer.id)"><i class="fas fa-pencil-alt"></i> Sửa</button>
+                            <button class="menu-content-button" (click)="deleteItem(customer.id)"><i class="fas fa-trash"></i> Xóa</button>
+                        </div>
+                        </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="store-filter clearfix">
+                <span class="store-qty">Hiển thị {{ (currentPage - 1) * pageSize + 1 }} - {{ (currentPage * pageSize) < total ? currentPage * pageSize : total }} khách hàng trong tổng số {{ total }} kết quả</span>
+                <ul class="store-pagination">
+                    <li *ngFor="let page of getPageNumbers()" [class.active]="currentPage === page" (click)="changePage(page)">
+                        <a >{{ page }}</a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </main>
+</body>

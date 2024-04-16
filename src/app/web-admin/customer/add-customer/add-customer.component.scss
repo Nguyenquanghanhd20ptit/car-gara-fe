@@ -1,0 +1,87 @@
+
+.form-container{
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+    margin-bottom: 50px;
+}
+
+
+.order_formPurchase{
+    background: rgba(178,132,45,.1);
+    padding: 24px 24px 60px;
+}
+.formPurchase{
+    padding-left: 14px;
+    padding-right: 14px;
+    width: 50%;
+}
+
+.formPurchase_wrapper{
+    background: #FFF;
+    padding: 24px;
+}
+
+.formPurchase_wrapper_title{
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 27px;
+    margin-bottom: 24px;
+}
+
+.ant-form-item-label{
+    padding: 0px 0px 8px;
+}
+
+.formPurchase_input{ 
+    width: 95%;
+    padding: 10px;
+    outline: none;
+    border-radius: 4px;
+    border: 0.5px solid #bdbdbd;
+}
+
+.formPurchase_textArea{
+    word-wrap: break-word;
+     resize: none; 
+     font-family: inherit; 
+     font-size: inherit; 
+     font-weight: inherit;
+
+}
+
+.ant-form-item{
+    margin-bottom: 24px;
+}
+.ant-checkbox-checked{
+    display: flex;
+}
+.ant-checkbox-input{
+    margin-right: 8px;
+}
+
+.formPurchase_submitBtn{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.formPurchase_submit{
+    padding: 15px 8px;
+    border: none;
+    outline: none;
+    background: #006d33;
+    border-radius: 4px;
+    color: #fff;
+    font-weight: 700;
+}
+.formPurchase_submit:hover{
+    background-color: #30754f;
+}
+
+.formPurchase-select-button {
+    width: 100%;
+    padding: 10px;
+    outline: none;
+    border-radius: 4px;
+    border: 0.5px solid #bdbdbd;
+}

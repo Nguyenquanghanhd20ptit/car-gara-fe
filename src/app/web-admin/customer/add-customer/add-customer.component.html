@@ -1,0 +1,81 @@
+<div class="container form-container">
+    <div class="formPurchase">
+      <div class="order_formPurchase">
+        <div class="formPurchase_wrapper">
+          <h3 class="formPurchase_wrapper_title">Thêm Khách hàng</h3>
+          <form [formGroup]="customerForm" (ngSubmit)="onSubmit()">
+            <div>
+              <div appearance="outline" class="ant-form-item">
+                <div class="ant-form-item-label">
+                  <label class="ant-form-item-label">Tên khách hàng:</label>
+                </div>
+                <div>
+                  <input matInput placeholder="Nhập tên khách hàng" class="formPurchase_input" formControlName="name" aria-required="true">
+                </div>
+                <span class="input-error" *ngIf="!customerForm.get('name').valid && customerForm.get('name').dirty">
+                  {{ error.requiredField }}
+                </span>
+              </div>
+            </div>
+  
+            <div>
+              <div appearance="outline" class="ant-form-item">
+                <div class="ant-form-item-label">
+                  <label class="ant-form-item-label">Email:</label>
+                </div>
+                <div>
+                  <input matInput placeholder="Nhập email" class="formPurchase_input" formControlName="email" aria-required="true">
+                </div>
+                <span class="input-error" *ngIf="!customerForm.get('email').valid && customerForm.get('email').dirty">
+                  {{ error.requiredField }}
+                </span>
+              </div>
+            </div>
+  
+            <div>
+              <div appearance="outline" class="ant-form-item">
+                <div class="ant-form-item-label">
+                  <label class="ant-form-item-label">Địa chỉ:</label>
+                </div>
+                <div>
+                  <input matInput placeholder="Nhập địa chỉ" class="formPurchase_input" formControlName="address">
+                </div>
+              </div>
+            </div>
+  
+            <div>
+              <div appearance="outline" class="ant-form-item">
+                <div class="ant-form-item-label">
+                  <label class="ant-form-item-label">Số điện thoại:</label>
+                </div>
+                <div>
+                  <input matInput placeholder="Nhập số điện thoại" class="formPurchase_input" formControlName="phone_number" aria-required="true">
+                </div>
+                <span class="input-error" *ngIf="!customerForm.get('phone_number').valid && customerForm.get('phone_number').dirty">
+                  {{ error.requiredField }}
+                </span>
+              </div>
+            </div>
+  
+            <div>
+              <div appearance="outline" class="ant-form-item">
+                <div class="ant-form-item-label">
+                  <label class="ant-form-item-label">Ảnh đại diện:</label>
+                </div>
+                <div>
+                  <input matInput placeholder="Nhập ảnh đại diện" class="formPurchase_input" formControlName="avatar_url">
+                </div>
+              </div>
+            </div>
+  
+            <div class="ant-form-item">
+              <div class="formPurchase_submitBtn">
+                <button class="formPurchase_submit" type="submit" [disabled]="!customerForm.valid">Thêm khách hàng</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  

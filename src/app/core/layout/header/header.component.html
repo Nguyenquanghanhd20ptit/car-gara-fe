@@ -1,1 +1,23 @@
-<p>header works!</p>
+<!-- header.component.html -->
+<div class="header">
+    <div class="logo">
+      <img style="margin-left: 250px;" src="https://cdn0684.cdn4s.com/media/logo.png" alt="Logo">
+    </div>
+    <div class="user-profile" *ngIf="isLoggedIn">
+       <div style="margin-right: 30px;"> <i  class="fa-regular fa-bell user-profile-icon"></i> </div>
+       <div class="user-profile-name"><p>Quang Hạnh</p> </div>
+      <div><img class="user-profile-img" src="../../../../assets/images/Facebook-Avatar_3.png" alt="User Avatar" (click)="openUserProfile()"></div>
+    </div>
+  </div>
+  
+  <!-- Popup của người dùng -->
+  <div class="user-popup" *ngIf="showUserProfile">
+    <div class="user-info">
+      <img  class="user-info-image" src="../../../../assets/images/Facebook-Avatar_3.png" alt="User Avatar">
+      <ul>
+        <li><i class="fa-regular fa-address-card"></i><a href="#">Hồ sơ</a></li>
+        <li><i class="fa-solid fa-right-from-bracket"></i><a href="#" (click)="logout()">Đăng xuất</a></li>
+      </ul>
+    </div>
+  </div>
+  

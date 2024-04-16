@@ -1,0 +1,51 @@
+<div class="dialog-container">
+    <div class="table__header">
+        <h1>Chọn phụ kiện</h1>
+        <div class="input-group">
+            <input type="search" style="padding: 15px;" [(ngModel)]="searchValue" (ngModelChange)="onSearchChange()" placeholder="Search Data...">
+             <i style="font-size: 20px;" class="fa-solid fa-magnifying-glass"></i>
+        </div>
+    </div>
+    <br>
+    <div class="product-in-cart">
+        <table>
+            <colgroup>
+                <col style="width: 150px;">
+                <col style="width: 300px;">
+                <col style="width: 100px;">
+                <col style="width: 100px;">
+                <col style="width: 100px;">
+                <col style="width: 60px;">
+            </colgroup>
+            <thead class="ant-table-thead">
+                <tr>
+                    <th class="ant-table-cell"></th>
+                    <th class="ant-table-cell">Sản phẩm</th>
+                    <th class="ant-table-cell">đơn giá</th>
+                    <th class="ant-table-cell">số lượng</th>
+                    <th class="ant-table-cell">số tiền</th>
+                    <th class="ant-table-cell"></th>
+                </tr>
+            </thead>
+            <tbody class="ant-table-tbody">
+                <tr class="ant-table-row" *ngFor="let accessory of accessorys; let i = index">
+                    <td class="ant-table-cell"><span><img [src]="accessory.imageUrl"></span></td>
+                    <td class="ant-table-cell"><a class="table-cell-nameProduct" >{{accessory.name}}</a></td>
+                    <td class="ant-table-cell">{{ accessory.price.toLocaleString('vi-VN') }} {{accessory.currency}}</td>
+                    <td class="ant-table-cell">
+                        <div class="quanty-label">
+                            <div class="input-number">
+                                <input type="number" [value]="quantityAccessory[i]" [(ngModel)]="quantityAccessory[i]" [min]="1" [max]="accessory.quantity" 
+                                (change)="updatePaymentNum(i,accessory.quantity)" >
+                                <span class="qty-up" (click)="quantyUp(i,accessory.quantity)">+</span>
+                                <span class="qty-down" (click)="quantyDown(i)">-</span>
+                            </div>
+                    </div></td>
+                    <td class="ant-table-cell ant-table-totalMoney">{{ accessory.totalPrice ? accessory.totalPrice.toLocaleString('vi-VN') : '' }} {{accessory.currency}}</td>
+                    <td class="ant-table-cell"> <button type="button" (click)="chooseAccessory(i)"> chọn</button></td>
+                </tr>
+            </tbody>
+        </table>
+        <button mat-button [mat-dialog-close]="true">Delete</button>
+    </div>
+</div>

@@ -1,0 +1,42 @@
+
+<div class="dialog-container">
+<div class="product-cart-box">
+    <div class="table__header">
+        <h1>Chọn dịch vụ</h1>
+        <div class="input-group">
+            <input type="search" [(ngModel)]="searchValue" (ngModelChange)="onSearchChange()" style="padding: 15px;" placeholder="Search Data...">
+             <i style="font-size: 20px;" class="fa-solid fa-magnifying-glass"></i>
+        </div>
+    </div>
+    <br>
+    <div class="product-in-cart">
+        <table>
+            <colgroup>
+                <col style="width: 150px;">
+                <col style="width: 200px;">
+                <col style="width: 200px;">
+                <col style="width: 100px;">
+                <col style="width: 60px;">
+            </colgroup>
+            <thead class="ant-table-thead">
+                <tr>
+                    <th class="ant-table-cell"></th>
+                    <th class="ant-table-cell">Tên dịch vụ</th>
+                    <th class="ant-table-cell">Loại dịch vụ</th>
+                    <th class="ant-table-cell">số tiền</th>
+                </tr>
+            </thead>
+            <tbody class="ant-table-tbody">
+                <tr class="ant-table-row" *ngFor="let service of services; let i =index">
+                      <td class="ant-table-cell"><span><img [src]="service.imageUrl"></span></td>
+                      <td class="ant-table-cell"><a class="table-cell-nameProduct" >{{service.name}}</a></td>
+                      <td class="ant-table-cell"><a class="table-cell-nameProduct" >{{service.type}}</a></td>
+                      <td class="ant-table-cell">{{ service.price.toLocaleString('vi-VN') }} {{service.currency}}</td>
+                      <td class="ant-table-cell"> <button type="button" (click)="chooseService(i)"> chọn</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</div>

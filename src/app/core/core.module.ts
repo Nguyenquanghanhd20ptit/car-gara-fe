@@ -7,6 +7,7 @@ import { BreadcrumbsComponent } from './layout/breadcrumbs/breadcrumbs.component
 import { ContactEmailComponent } from './layout/contact-email/contact-email.component';
 import { AppComponent } from './app/app.component';
 import { RouterModule } from '@angular/router';
+import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { SharedModule } from '../shared/shared/shared.module';
 
 
@@ -18,7 +19,8 @@ import { SharedModule } from '../shared/shared/shared.module';
     HeaderComponent,
     FooterComponent,
     BreadcrumbsComponent,
-    ContactEmailComponent
+    ContactEmailComponent,
+    SidebarComponent
   ],
   imports: [
     CommonModule,
