@@ -65,14 +65,14 @@ export class StatisticsRevenueComponent implements OnInit {
     }
   
     this.statisticService.statisticRevenue(body).subscribe((data: any) => {
-      if (data && data.errorCode === "00") {
+      if (data && data.error_code === "00") {
         let pageResponse = JSON.parse(data.data);
-        this.totalCustomer = pageResponse.totalCustomer;
-        this.totalOrder = pageResponse.totalOrder;
-        this.totalRevenue = pageResponse.totalRevenue;
+        this.totalCustomer = pageResponse.total_customer;
+        this.totalOrder = pageResponse.total_order;
+        this.totalRevenue = pageResponse.total_revenue;
         this.statistics = pageResponse.items;
-      } else if (data && data.errorMessage) {
-        this.statistics.error(data.errorMessage);
+      } else if (data && data.error_message) {
+        this.statistics.error(data.error_message);
       } else {
         this.toastr.error("Đã có lỗi sảy ra");
       }
@@ -108,7 +108,7 @@ export class StatisticsRevenueComponent implements OnInit {
   
     if (!isMenuClicked) {
       this.statistics.forEach(statistic => {
-        this.openMenu[statistic.customerId] = false;
+        this.openMenu[statistic.customer_id] = false;
       });
     }
   }
@@ -116,8 +116,8 @@ export class StatisticsRevenueComponent implements OnInit {
   
   toggleMenu(index) {
     this.statistics.forEach(statistic => {
-      if(statistic.customerId !== index){
-        this.openMenu[statistic.customerId] = false;
+      if(statistic.customer_id !== index){
+        this.openMenu[statistic.customer_id] = false;
       }
     });
     this.openMenu[index] = !this.openMenu[index];

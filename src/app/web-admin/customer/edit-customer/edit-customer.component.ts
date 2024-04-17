@@ -41,17 +41,17 @@ export class EditCustomerComponent implements OnInit {
 
   getCustomerById(id){
     this.customerService.getById(id).subscribe((data) =>{
-      if(data.errorCode && data.errorCode === "00"){
+      if(data && data.error_code === "00"){
         this.customer = JSON.parse(data.data);
         this.customerForm.patchValue({
           name: this.customer.name,
           email: this.customer.email,
           address: this.customer.address,
-          phone_number: this.customer.phoneNumber,
-          avatar_url: this.customer.avatarUrl
+          phone_number: this.customer.phone_number,
+          avatar_url: this.customer.avatar_url
         });
-      } else if(data.errorCode){
-        this.toastr.error(data.errorMessage);
+      } else if(data && data.error_message){
+        this.toastr.error(data.error_message);
       } else {
         this.toastr.error("get customer thất bại")
       }
@@ -62,11 +62,11 @@ export class EditCustomerComponent implements OnInit {
     if (this.customerForm.valid) {
       const form = this.customerForm.value;
       this.customerService.update(this.customerId,form).subscribe((data : any) => {
-        if(data.errorCode && data.errorCode === "00"){
+        if(data && data.error_code === "00"){
           this.toastr.success("updata khách hàng thành công")
           this.router.navigateByUrl("/admin/customer")
-        } else if(data.errorCode){
-          this.toastr.error(data.errorMessage);
+        } else if(data.error_message){
+          this.toastr.error(data.error_message);
         } else {
           this.toastr.error("Thêm thất bại")
         }

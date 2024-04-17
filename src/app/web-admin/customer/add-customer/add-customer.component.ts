@@ -35,11 +35,11 @@ export class AddCustomerComponent implements OnInit {
     if (this.customerForm.valid) {
       const form = this.customerForm.value;
       this.customerService.addNew(form).subscribe((data : any) => {
-        if(data.errorCode && data.errorCode === "00"){
+        if(data && data.error_code === "00"){
           this.toastr.success("Thêm khách hàng thành công")
           this.router.navigateByUrl("/admin/customer")
-        }else if(data.errorCode){
-          this.toastr.error(data.errorMessage);
+        }else if(data && data.error_message){
+          this.toastr.error(data.error_message);
         }
         else {
           this.toastr.error("Thêm thất bại")

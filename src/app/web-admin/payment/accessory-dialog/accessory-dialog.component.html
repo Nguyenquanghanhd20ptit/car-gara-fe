@@ -29,7 +29,7 @@
             </thead>
             <tbody class="ant-table-tbody">
                 <tr class="ant-table-row" *ngFor="let accessory of accessorys; let i = index">
-                    <td class="ant-table-cell"><span><img [src]="accessory.imageUrl"></span></td>
+                    <td class="ant-table-cell"><span><img [src]="accessory.image_url"></span></td>
                     <td class="ant-table-cell"><a class="table-cell-nameProduct" >{{accessory.name}}</a></td>
                     <td class="ant-table-cell">{{ accessory.price.toLocaleString('vi-VN') }} {{accessory.currency}}</td>
                     <td class="ant-table-cell">
@@ -41,7 +41,7 @@
                                 <span class="qty-down" (click)="quantyDown(i)">-</span>
                             </div>
                     </div></td>
-                    <td class="ant-table-cell ant-table-totalMoney">{{ accessory.totalPrice ? accessory.totalPrice.toLocaleString('vi-VN') : '' }} {{accessory.currency}}</td>
+                    <td class="ant-table-cell ant-table-totalMoney">{{ accessory.total_price ? accessory.total_price.toLocaleString('vi-VN') : '' }} {{accessory.currency}}</td>
                     <td class="ant-table-cell"> <button type="button" (click)="chooseAccessory(i)"> chọn</button></td>
                 </tr>
             </tbody>

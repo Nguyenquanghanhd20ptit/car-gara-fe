@@ -79,18 +79,18 @@
                 <tbody>
                     <tr *ngFor="let statistic of statistics; let i = index">
                         <td>{{ i +1}}</td>
-                        <td><img src="{{statistic.avatarUrl}}" alt="">{{ statistic.name }}</td>
-                        <td>{{ statistic.phoneNumber }}</td>
+                        <td><img src="{{statistic.avatar_url}}" alt="">{{ statistic.name }}</td>
+                        <td>{{ statistic.phone_number }}</td>
                         <td>{{ statistic.email }}</td>
-                        <td>{{ statistic.numCorrection }}</td>
-                        <td>{{ statistic.totalPrice.toLocaleString("vi-VN") }} {{statistic.currency}}</td>
+                        <td>{{ statistic.num_correction }}</td>
+                        <td>{{ statistic.total_price.toLocaleString("vi-VN") }} {{statistic.currency}}</td>
                         <td>
-                            <div class="action-menu" (click)="toggleMenu(statistic.customerId)">
-                                <button class="action-button" data-household-id="${household.id}">
+                            <div class="action-menu" (click)="toggleMenu(statistic.customer_id)">
+                                <button class="action-button" >
                                     <i class="fas fa-cogs"></i>
                                 </button>
-                                <div class="menu-content" [ngClass]="{'open-menu': openMenu[statistic.customerId]}">
-                                    <button class="menu-content-button" (click)="edit(statistic.customerId)"><i
+                                <div class="menu-content" [ngClass]="{'open-menu': openMenu[statistic.customer_id]}">
+                                    <button class="menu-content-button" (click)="edit(statistic.customer_id)"><i
                                             class="fas fa-pencil-alt"></i> Xem chi tiết</button>
                                 </div>
                             </div>

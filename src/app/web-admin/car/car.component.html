@@ -22,9 +22,9 @@
                 <tbody>
                     <tr *ngFor="let car of cars">
                         <td>{{ car.id}}</td>
-                        <td><img src="{{car.imageUrl}}" alt="">{{ car.name }}</td>
+                        <td><img src="{{car.image_url}}" alt="">{{ car.name }}</td>
                         <td>{{ car.customer.name }}</td>
-                        <td>{{ car.licensePlates }}</td>
+                        <td>{{ car.license_plates }}</td>
                         <td>{{ car.status }}</td>
                         <td><div class="action-menu" (click)="toggleMenu(car.id)">
                             <button class="action-button" data-household-id="${household.id}">

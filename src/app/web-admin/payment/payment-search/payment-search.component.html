@@ -23,13 +23,13 @@
                 <tbody>
                     <tr *ngFor="let order of orders">
                         <td>{{ order.id}}</td>
-                        <td style="display: flex;"><img src="{{order.customer.avatarUrl}}" alt="">{{ order.customer.name }}</td>
-                        <td>{{ order.customer.phoneNumber }}</td>
+                        <td style="display: flex;"><img src="{{order.customer.avatar_url}}" alt="">{{ order.customer.name }}</td>
+                        <td>{{ order.customer.phone_number }}</td>
                         <td>{{ order.customer.email }}</td>
-                        <td>{{ order.totalPrice.toLocaleString('vi-VN') }} {{order.currency}}</td>
+                        <td>{{ order.total_price.toLocaleString('vi-VN') }} {{order.currency}}</td>
                         <td>{{ order.status }}</td>
                         <td><div class="action-menu" (click)="toggleMenu(order.id)">
-                            <button class="action-button" data-household-id="${household.id}">
+                            <button class="action-button">
                                 <i class="fas fa-cogs"></i>
                             </button>
                           <div class="menu-content"  [ngClass]="{'open-menu': openMenu[order.id]}">

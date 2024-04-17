@@ -39,13 +39,13 @@ export class AccessoryDialogComponent implements OnInit {
       }
     }
     this.accessoryService.searchAccessory(body).subscribe((data: any) => {
-      if (data && data.errorCode === "00") {
+      if (data && data.error_code === "00") {
         let pageResponse = JSON.parse(data.data);
         this.accessorys = pageResponse.items;
         this.updateAccessorys();
       }
-      else if (data && data.errorMessage) {
-        this.toastr.error(data.errorMessage);
+      else if (data && data.error_message) {
+        this.toastr.error(data.error_message);
       } else {
         this.toastr.error("Đã có lỗi sảy ra");
       }
@@ -58,7 +58,7 @@ export class AccessoryDialogComponent implements OnInit {
     for(let i = 0 ; i < this.accessorys.length ; i++){
       let accessory = this.accessorys[i];
       let totalPrice =  accessory.price * 1;
-      this.accessorys[i].totalPrice = totalPrice;
+      this.accessorys[i].total_price = totalPrice;
       if(check) this.quantityAccessory.push(1);
     }
   }
@@ -88,7 +88,7 @@ export class AccessoryDialogComponent implements OnInit {
         if(i === index){
           let accessory = this.accessorys[i];
           let totalPrice =  accessory.price * this.quantityAccessory[index];
-          this.accessorys[i].totalPrice = totalPrice;
+          this.accessorys[i].total_price = totalPrice;
         }
       }
     }

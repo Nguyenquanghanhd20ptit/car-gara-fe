@@ -7,22 +7,22 @@
     </div>
     <br> <br>
     <div class="booking-info">
-         <div> <img src="{{order.customer.avatarUrl}}" alt="Logo"></div>
+         <div> <img src="{{order.customer.avatar_url}}" alt="Logo"></div>
         <div>
         <p class="booking-info-title">Tên khách hàng: {{order.customer.name}}</p>
-        <p class="booking-info-title"> Số điện thoại:  {{order.customer.phoneNumber}}</p>
+        <p class="booking-info-title"> Số điện thoại:  {{order.customer.phone_number}}</p>
         <p class="booking-info-title"> Email:  {{order.customer.email}}</p>
         <p class="booking-info-title"> Tên xe:  {{order.booking.car.name}}</p>
-        <p class="booking-info-title"> Biển số xe:  {{order.booking.car.licensePlates}}</p>
+        <p class="booking-info-title"> Biển số xe:  {{order.booking.car.license_plates}}</p>
         <p class="booking-info-title"> Địa chỉ :  {{order.customer.address}}</p>
-        <p class="booking-info-title"> yêu cầu: {{order.booking.conditionDes}}</p>
+        <p class="booking-info-title"> yêu cầu: {{order.booking.condition_des}}</p>
         <p class="booking-info-title"> Đã thực hiện: {{order.booking.made}}</p>
-        <p class="booking-info-title"> Ngày đặt lịch:  {{order.booking.appointmentTime}}</p>
+        <p class="booking-info-title"> Ngày đặt lịch:  {{order.booking.appointment_time}}</p>
         <p class="booking-info-title"> Trạng thái đơn hàng:  {{order.status}}</p>
     </div>
     </div>
     <div class="div-button-add">
-        <div> <p class="product-count">Bạn đã sử dụng {{order.serviceOrders.length}} dịch vụ</p></div>
+        <div> <p class="product-count">Bạn đã sử dụng {{order.service_orders.length}} dịch vụ</p></div>
     </div>
     <div class="shopping-cart-wrapper">
         <div class="product-cart-box">
@@ -44,8 +44,8 @@
                         </tr>
                     </thead>
                     <tbody class="ant-table-tbody">
-                        <tr class="ant-table-row" *ngFor="let serviceOrder of order.serviceOrders; let i = index">
-                              <td class="ant-table-cell"><span><img [src]="serviceOrder.service.imageUrl"></span></td>
+                        <tr class="ant-table-row" *ngFor="let serviceOrder of order.service_orders; let i = index">
+                              <td class="ant-table-cell"><span><img [src]="serviceOrder.service.image_url"></span></td>
                               <td class="ant-table-cell"><a class="table-cell-nameProduct">{{serviceOrder.service.name}}</a></td>
                               <td class="ant-table-cell"><a class="table-cell-nameProduct" >{{serviceOrder.service.type}}</a></td>
                               <td class="ant-table-cell">{{ serviceOrder.service.price.toLocaleString('vi-VN') }} {{serviceOrder.service.currency}}</td>
@@ -56,7 +56,7 @@
         </div>
         <br><br>
         <div class="div-button-add">
-            <div> <p class="product-count">Bạn đã thay {{order.accessoryOrders.length}} phụ kiện</p></div>
+            <div> <p class="product-count">Bạn đã thay {{order.accessory_orders.length}} phụ kiện</p></div>
         </div>
         <div class="product-cart-box">
             <div class="product-in-cart">
@@ -80,12 +80,12 @@
                         </tr>
                     </thead>
                     <tbody class="ant-table-tbody">
-                        <tr class="ant-table-row" *ngFor="let accessoryOrder of order.accessoryOrders; let i = index">
-                              <td class="ant-table-cell"><span><img [src]="accessoryOrder.accessory.imageUrl"></span></td>
+                        <tr class="ant-table-row" *ngFor="let accessoryOrder of order.accessory_orders; let i = index">
+                              <td class="ant-table-cell"><span><img [src]="accessoryOrder.accessory.image_url"></span></td>
                               <td class="ant-table-cell"><a class="table-cell-nameProduct" href="/product">{{accessoryOrder.accessory.name}}</a></td>
                               <td class="ant-table-cell">{{ accessoryOrder.accessory.price.toLocaleString('vi-VN') }} {{accessoryOrder.accessory.currency}}</td>
                               <td class="ant-table-cell"> {{accessoryOrder.quantity}}</td>
-                              <td class="ant-table-cell ant-table-totalMoney">{{ accessoryOrder.totalPrice.toLocaleString('vi-VN') }} {{accessoryOrder.currency}}</td>
+                              <td class="ant-table-cell ant-table-totalMoney">{{ accessoryOrder.total_price.toLocaleString('vi-VN') }} {{accessoryOrder.currency}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -96,7 +96,7 @@
                 <h2>Tổng số tiền phải thanh toán</h2>
                 <div class="total-price display-align">
                     <div><span>Tổng tiền hàng</span></div>
-                    <div><span>{{order.totalPrice.toLocaleString("vi-VN")}} VNĐ</span></div>
+                    <div><span>{{order.total_price.toLocaleString("vi-VN")}} VNĐ</span></div>
                 </div>
                 <div class="total-price display-align">
                     <div><span>Tổng coupon giảm giá</span></div>
@@ -105,7 +105,7 @@
                 <div class="ant-divider-horizontal"></div>
                 <div class="totalPayment-total-money display-align">
                     <span >TỔNG THANH TOÁN: </span>
-                    <span class="totalPayment-total-money-right">{{order.totalPrice.toLocaleString("vi-VN")}} VNĐ</span>
+                    <span class="totalPayment-total-money-right">{{order.total_price.toLocaleString("vi-VN")}} VNĐ</span>
                 </div>
             </div>
         </div>

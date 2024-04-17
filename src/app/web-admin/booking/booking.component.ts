@@ -46,13 +46,13 @@ export class BookingComponent implements OnInit {
       }
     }
     this.bookingService.search(body).subscribe((data: any) => {
-      if (data && data.errorCode === "00") {
+      if (data && data.error_code === "00") {
         let pageResponse = JSON.parse(data.data);
         this.total = pageResponse.total;
         this.bookings = pageResponse.items;
       }
-      else if (data && data.errorMessage) {
-        this.toastr.error(data.errorMessage);
+      else if (data && data.error_message) {
+        this.toastr.error(data.error_message);
       } else {
         this.toastr.error("Đã có lỗi sảy ra");
       }

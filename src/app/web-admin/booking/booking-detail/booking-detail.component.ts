@@ -25,10 +25,10 @@ export class BookingDetailComponent implements OnInit {
   }
   getBookingById(id){
     this.bookingService.getDetail(id).subscribe((data) =>{
-      if(data.errorCode && data.errorCode === "00"){
+      if(data && data.error_code === "00"){
         this.booking = JSON.parse(data.data);
-      } else if(data.errorCode){
-        this.toastr.error(data.errorMessage);
+      } else if(data && data.error_Message){
+        this.toastr.error(data.error_Message);
       } else {
         this.toastr.error("get customer thất bại")
       }

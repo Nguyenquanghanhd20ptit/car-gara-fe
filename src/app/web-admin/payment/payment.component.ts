@@ -43,10 +43,10 @@ export class PaymentComponent implements OnInit {
 
   getBookingById(id){
     this.bookingService.getDetail(id).subscribe((data) =>{
-      if(data.errorCode && data.errorCode === "00"){
+      if(data && data.error_code === "00"){
         this.booking = JSON.parse(data.data);
-      } else if(data.errorCode){
-        this.toastr.error(data.errorMessage);
+      } else if(data.error_message){
+        this.toastr.error(data.error_message);
       } else {
         this.toastr.error("get booking thất bại")
       }
@@ -56,7 +56,7 @@ export class PaymentComponent implements OnInit {
   updateTotalPrice(){
     this.totalPrice = 0;
     for(let i = 0 ; i < this.accessorys.length;i++){
-      this.totalPrice += this.accessorys[i].totalPrice;
+      this.totalPrice += this.accessorys[i].total_price;
     }
     for(let i = 0 ; i< this.services.length; i++){
       this.totalPrice += this.services[i].price;
@@ -123,7 +123,7 @@ export class PaymentComponent implements OnInit {
     for(let i = 0 ; i < this.accessorys.length ; i++){
       let accessory = this.accessorys[i];
       let totalPrice =  accessory.price * 1;
-      this.accessorys[i].totalPrice = totalPrice;
+      this.accessorys[i].total_price = totalPrice;
     }
   }
 
@@ -152,7 +152,7 @@ export class PaymentComponent implements OnInit {
         if(i === index){
           let accessory = this.accessorys[i];
           let totalPrice =  accessory.price * this.quantityAccessory[index];
-          this.accessorys[i].totalPrice = totalPrice;
+          this.accessorys[i].total_price = totalPrice;
         }
       }
       this.updateTotalPrice();
@@ -208,13 +208,13 @@ export class PaymentComponent implements OnInit {
       }
 
       this.order.addNew(body).subscribe((data : any) => {
-        if(data.errorCode && data.errorCode === "00"){
+        if(data && data.error_code === "00"){
           let orderId = JSON.parse(data.data);
           console.log(orderId);
           this.toastr.success("Thêm đơn hàng thành công")
           this.router.navigate(["/admin/payment/detail",orderId])
-        }else if(data.errorCode){
-          this.toastr.error(data.errorMessage);
+        }else if(data.error_message){
+          this.toastr.error(data.error_message);
         }
         else {
           this.toastr.error("Thêm thất bại")

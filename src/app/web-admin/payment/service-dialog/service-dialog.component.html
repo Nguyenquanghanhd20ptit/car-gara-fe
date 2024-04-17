@@ -28,7 +28,7 @@
             </thead>
             <tbody class="ant-table-tbody">
                 <tr class="ant-table-row" *ngFor="let service of services; let i =index">
-                      <td class="ant-table-cell"><span><img [src]="service.imageUrl"></span></td>
+                      <td class="ant-table-cell"><span><img [src]="service.image_url"></span></td>
                       <td class="ant-table-cell"><a class="table-cell-nameProduct" >{{service.name}}</a></td>
                       <td class="ant-table-cell"><a class="table-cell-nameProduct" >{{service.type}}</a></td>
                       <td class="ant-table-cell">{{ service.price.toLocaleString('vi-VN') }} {{service.currency}}</td>

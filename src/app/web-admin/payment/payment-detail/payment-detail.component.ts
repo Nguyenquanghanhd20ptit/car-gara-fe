@@ -26,10 +26,10 @@ export class PaymentDetailComponent implements OnInit {
 
   getOrderById(id){
     this.orderService.getById(id).subscribe((data) =>{
-      if(data.errorCode && data.errorCode === "00"){
+      if(data && data.error_code === "00"){
         this.order = JSON.parse(data.data);
-      } else if(data.errorCode){
-        this.toastr.error(data.errorMessage);
+      } else if(data && data.error_message){
+        this.toastr.error(data.error_message);
       } else {
         this.toastr.error("get order thất bại")
       }
@@ -37,11 +37,11 @@ export class PaymentDetailComponent implements OnInit {
   }
   paymentInCash(){
     this.orderService.updateStatusOrderIsSuccess(this.order.id).subscribe((data)=>{
-      if(data.errorCode && data.errorCode === "00"){
+      if(data && data.error_code === "00"){
         this.toastr.success("Thanh toán đơn hàng thành công")
         this.router.navigateByUrl("/admin/booking")
-      } else if(data.errorCode){
-        this.toastr.error(data.errorMessage);
+      } else if(data && data.error_message){
+        this.toastr.error(data.error_message);
       } else {
         this.toastr.error("update status order thất bại")
       }

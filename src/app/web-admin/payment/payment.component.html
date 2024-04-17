@@ -7,17 +7,17 @@
     </div>
     <br> <br>
     <div class="booking-info">
-         <div> <img src="{{booking.customer.avatarUrl}}" alt="Logo"></div>
+         <div> <img src="{{booking.customer.avatar_url}}" alt="Logo"></div>
         <div>
         <p class="booking-info-title">Tên khách hàng: {{booking.customer.name}}</p>
-        <p class="booking-info-title"> Số điện thoại:  {{booking.customer.phoneNumber}}</p>
+        <p class="booking-info-title"> Số điện thoại:  {{booking.customer.phone_number}}</p>
         <p class="booking-info-title"> Email:  {{booking.customer.email}}</p>
         <p class="booking-info-title"> Tên xe:  {{booking.car.name}}</p>
-        <p class="booking-info-title"> Biển số xe:  {{booking.car.licensePlates}}</p>
+        <p class="booking-info-title"> Biển số xe:  {{booking.car.license_plates}}</p>
         <p class="booking-info-title"> Địa chỉ :  {{booking.customer.address}}</p>
-        <p class="booking-info-title"> yêu cầu: {{booking.conditionDes}}</p>
+        <p class="booking-info-title"> yêu cầu: {{booking.condition_des}}</p>
         <p class="booking-info-title"> Đã thực hiện: {{booking.made}}</p>
-        <p class="booking-info-title"> Ngày đặt lịch:  {{booking.appointmentTime}}</p>
+        <p class="booking-info-title"> Ngày đặt lịch:  {{booking.appointment_time}}</p>
     </div>
     </div>
     <div class="div-button-add">
@@ -47,7 +47,7 @@
                     </thead>
                     <tbody class="ant-table-tbody">
                         <tr class="ant-table-row" *ngFor="let service of services; let i = index">
-                              <td class="ant-table-cell"><span><img [src]="service.imageUrl"></span></td>
+                              <td class="ant-table-cell"><span><img [src]="service.image_url"></span></td>
                               <td class="ant-table-cell"><a class="table-cell-nameProduct">{{service.name}}</a></td>
                               <td class="ant-table-cell"><a class="table-cell-nameProduct" >{{service.type}}</a></td>
                               <td class="ant-table-cell">{{ service.price.toLocaleString('vi-VN') }} {{service.currency}}</td>
@@ -87,7 +87,7 @@
                     </thead>
                     <tbody class="ant-table-tbody">
                         <tr class="ant-table-row" *ngFor="let accessory of accessorys; let i = index">
-                              <td class="ant-table-cell"><span><img [src]="accessory.imageUrl"></span></td>
+                              <td class="ant-table-cell"><span><img [src]="accessory.image_url"></span></td>
                               <td class="ant-table-cell"><a class="table-cell-nameProduct" href="/product">{{accessory.name}}</a></td>
                               <td class="ant-table-cell">{{ accessory.price.toLocaleString('vi-VN') }} {{accessory.currency}}</td>
                               <td class="ant-table-cell">
@@ -99,7 +99,7 @@
                                         <span class="qty-down" (click)="quantyDown(i)">-</span>
                                     </div>
                             </div></td>
-                              <td class="ant-table-cell ant-table-totalMoney">{{ accessory.totalPrice.toLocaleString('vi-VN') }} {{accessory.currency}}</td>
+                              <td class="ant-table-cell ant-table-totalMoney">{{ accessory.total_price.toLocaleString('vi-VN') }} {{accessory.currency}}</td>
                               <td class="ant-table-cell"> <button type="button" class="cart-delete-button" (click)="deleteItemAccessory(i)"><i class="fa-solid fa-trash"></i></button></td>
                         </tr>
                     </tbody>
