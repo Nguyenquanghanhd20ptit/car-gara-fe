@@ -125,7 +125,7 @@
             </div>
         </div>
         <div class="submit-buy">
-            <button type="submit" class="submit-button-buy" (click)="createInvoice()"> <span>Tạo hóa đơn</span></button>
+            <button type="submit" [disabled]="notProductOrder()" class="submit-button-buy" (click)="createInvoice()"> <span>Tạo hóa đơn</span></button>
         </div>
     </div>  
 </div>

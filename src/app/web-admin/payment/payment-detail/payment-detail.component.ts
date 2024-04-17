@@ -38,6 +38,7 @@ export class PaymentDetailComponent implements OnInit {
   paymentInCash(){
     this.orderService.updateStatusOrderIsSuccess(this.order.id).subscribe((data)=>{
       if(data.errorCode && data.errorCode === "00"){
+        this.toastr.success("Thanh toán đơn hàng thành công")
         this.router.navigateByUrl("/admin/booking")
       } else if(data.errorCode){
         this.toastr.error(data.errorMessage);

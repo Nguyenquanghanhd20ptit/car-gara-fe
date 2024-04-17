@@ -223,4 +223,7 @@ export class PaymentComponent implements OnInit {
       })
       
     }
+    notProductOrder(){
+        return this.accessorys.length == 0 && this.services.length == 0;
+    }
 }
