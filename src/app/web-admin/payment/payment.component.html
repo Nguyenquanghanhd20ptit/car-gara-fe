@@ -16,6 +16,7 @@
         <p class="booking-info-title"> Biển số xe:  {{booking.car.licensePlates}}</p>
         <p class="booking-info-title"> Địa chỉ :  {{booking.customer.address}}</p>
         <p class="booking-info-title"> yêu cầu: {{booking.conditionDes}}</p>
+        <p class="booking-info-title"> Đã thực hiện: {{booking.made}}</p>
         <p class="booking-info-title"> Ngày đặt lịch:  {{booking.appointmentTime}}</p>
     </div>
     </div>
@@ -124,7 +125,7 @@
             </div>
         </div>
         <div class="submit-buy">
-            <button type="submit" class="submit-button-buy" (click)="createInvoice()"><a href=""> <span>Tạo hóa đơn</span></a></button>
+            <button type="submit" class="submit-button-buy" (click)="createInvoice()"> <span>Tạo hóa đơn</span></button>
         </div>
     </div>  
 </div>

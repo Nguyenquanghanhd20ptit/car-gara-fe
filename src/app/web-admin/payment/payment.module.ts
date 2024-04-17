@@ -9,6 +9,7 @@ import { TitleConstants } from 'src/app/core/constants/title.constants';
 import { SharedModule } from 'src/app/shared/shared/shared.module';
 import { MatDialogModule } from '@angular/material/dialog';
 import { PaymentDetailComponent } from './payment-detail/payment-detail.component';
+import { PaymentSearchComponent } from './payment-search/payment-search.component';
 
 
 
@@ -25,6 +26,12 @@ const routers : Routes = [
     data : {
       title : TitleConstants.HOME
     }
+  },{
+    path : "list/search",
+    component : PaymentSearchComponent,
+    data : {
+      title : TitleConstants.HOME
+    }
   }
 ]
 
@@ -33,7 +40,8 @@ const routers : Routes = [
   declarations: [BookingDialogComponent, 
     ServiceDialogComponent,
      AccessoryDialogComponent,
-     PaymentDetailComponent],
+     PaymentDetailComponent,
+     PaymentSearchComponent],
   imports: [
     CommonModule,
     SharedModule,

@@ -72,14 +72,15 @@
                         <th> Email </th>
                         <th> Số điện thoại </th>
                         <th> Số lần sửa xe </th>
+                        <th> Tổng số tiền </th>
                         <th> Tùy chọn </th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let statistic of statistics; let i = index">
-                        <td>{{ i}}</td>
-                        <td><img src="../../../assets/images/Facebook-Avatar_3.png" alt="">{{ statistic.name }}</td>
-                        <td>{{ statistic.phone }}</td>
+                        <td>{{ i +1}}</td>
+                        <td><img src="{{statistic.avatarUrl}}" alt="">{{ statistic.name }}</td>
+                        <td>{{ statistic.phoneNumber }}</td>
                         <td>{{ statistic.email }}</td>
                         <td>{{ statistic.numCorrection }}</td>
                         <td>{{ statistic.totalPrice.toLocaleString("vi-VN") }} {{statistic.currency}}</td>

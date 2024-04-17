@@ -67,7 +67,7 @@ export class StatisticsRevenueComponent implements OnInit {
     this.statisticService.statisticRevenue(body).subscribe((data: any) => {
       if (data && data.errorCode === "00") {
         let pageResponse = JSON.parse(data.data);
-        this.totalCustomer = pageResponse.totalOrder;
+        this.totalCustomer = pageResponse.totalCustomer;
         this.totalOrder = pageResponse.totalOrder;
         this.totalRevenue = pageResponse.totalRevenue;
         this.statistics = pageResponse.items;

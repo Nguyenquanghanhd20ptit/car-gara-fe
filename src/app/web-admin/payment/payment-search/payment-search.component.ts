@@ -2,36 +2,35 @@ import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { Route, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CustomerService } from 'src/app/core/service/app/customer/customer.service';
-
+import { OrderService } from 'src/app/core/service/app/order/order.service';
 @Component({
-  selector: 'app-customer',
-  templateUrl: './customer.component.html',
-  styleUrls: ['./customer.component.scss']
+  selector: 'app-payment-search',
+  templateUrl: './payment-search.component.html',
+  styleUrls: ['./payment-search.component.scss']
 })
-export class CustomerComponent implements OnInit {
+export class PaymentSearchComponent implements OnInit {
 
   public total: number;
-  public numColumes = 4;
   public currentPage = 1;
   public pageSize = 6;
-  public customers: any;
+  public orders: any;
   public openMenu: { [key: number]: boolean } = {};
   public searchValue: string = '';
   private searchTimeout: any;
 
   constructor(private elementRef: ElementRef,
-    private customerService: CustomerService,
+    private orderService: OrderService,
     private toastr: ToastrService,
     private router: Router) { }
 
   ngOnInit() {
-    this.getCustomer();
-    this.customers.forEach(customer => {
-      this.openMenu[customer.id] = false;
+    this.getOrders();
+    this.orders.forEach(order => {
+      this.openMenu[order.id] = false;
     });
   }
 
-  getCustomer() {
+  getOrders() {
     let body = {
       "keyword": this.searchValue,
       "filters": [],
@@ -43,11 +42,11 @@ export class CustomerComponent implements OnInit {
         ]
       }
     }
-    this.customerService.searchCustomer(body).subscribe((data: any) => {
+    this.orderService.search(body).subscribe((data: any) => {
       if (data && data.errorCode === "00") {
         let pageResponse = JSON.parse(data.data);
         this.total = pageResponse.total;
-        this.customers = pageResponse.items;
+        this.orders = pageResponse.items;
       }
       else if (data && data.errorMessage) {
         this.toastr.error(data.errorMessage);
@@ -59,7 +58,7 @@ export class CustomerComponent implements OnInit {
 
   changePage(page: number) {
     this.currentPage = page;
-    this.getCustomer();
+    this.getOrders();
   }
 
   getPageNumbers(): number[] {
@@ -79,14 +78,14 @@ export class CustomerComponent implements OnInit {
     });
 
     if (!isMenuClicked) {
-      this.customers.forEach(customer => {
+      this.orders.forEach(customer => {
         this.openMenu[customer.id] = false;
       });
     }
   }
 
   toggleMenu(index) {
-    this.customers.forEach(customer => {
+    this.orders.forEach(customer => {
       if (customer.id !== index) {
         this.openMenu[customer.id] = false;
       }
@@ -94,33 +93,14 @@ export class CustomerComponent implements OnInit {
     this.openMenu[index] = !this.openMenu[index];
   }
 
-  edit(id) {
-    this.router.navigate(["admin/customer/update",id]);
-  }
-
-  deleteItem(customerId) {
-    this.customerService.delete(customerId)
-    .subscribe((data) =>{
-      if(data && data.errorCode === "00"){
-        this.toastr.success("delete thanh cong");
-        this.router.navigateByUrl("admin/customer/addNew");
-      }else if(data && data.errorMessage){
-        this.toastr.error(data.errorMessage);
-      }
-      else {
-        this.toastr.error("delete that bai");
-      }
-    })
-  }
-
-  addNew() {
-    this.router.navigateByUrl("admin/customer/addNew");
+  getById(id) {
+    this.router.navigate(["/admin/payment/detail", id]);
   }
 
   onSearchChange() {
     clearTimeout(this.searchTimeout); 
     this.searchTimeout = setTimeout(() => {
-      this.getCustomer();
+      this.getOrders();
     }, 500);
   }
 }
