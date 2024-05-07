@@ -57,4 +57,11 @@ export class OrderService {
     const params = new HttpParams().set('id', id.toString());
     return this.http.post(`${this.baseUrl}/order/update-status/isPaid`, null, { params });
   }
+  paymentWithMomo(body: any) {
+    return this.http.post(`${this.baseUrl}/order/momo/create-transaction`,body).pipe(
+      map((data : any) =>{
+        return data;
+      })
+    )
+  }
 }

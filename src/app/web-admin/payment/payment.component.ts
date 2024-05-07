@@ -182,7 +182,7 @@ export class PaymentComponent implements OnInit {
       let serviceOrders: any[] = []; 
       for(let i = 0 ;i < this.services.length;i++){
         let body = {
-          total_price : this.services[i].price,
+          price : this.services[i].price,
           currency : "VNĐ",
           service_id : this.services[i].id
         }
@@ -192,7 +192,7 @@ export class PaymentComponent implements OnInit {
       for(let i = 0 ; i < this.accessorys.length; i++){
         let body = {
           quantity :  this.quantityAccessory[i],
-          total_price : this.accessorys[i].price * this.quantityAccessory[i],
+          price : this.accessorys[i].price,
           currency : "VNĐ",
           accessory_id : this.accessorys[i].id
         }

@@ -85,7 +85,7 @@
                               <td class="ant-table-cell"><a class="table-cell-nameProduct" href="/product">{{accessoryOrder.accessory.name}}</a></td>
                               <td class="ant-table-cell">{{ accessoryOrder.accessory.price.toLocaleString('vi-VN') }} {{accessoryOrder.accessory.currency}}</td>
                               <td class="ant-table-cell"> {{accessoryOrder.quantity}}</td>
-                              <td class="ant-table-cell ant-table-totalMoney">{{ accessoryOrder.total_price.toLocaleString('vi-VN') }} {{accessoryOrder.currency}}</td>
+                              <td class="ant-table-cell ant-table-totalMoney">{{ (accessoryOrder.price * accessoryOrder.quantity).toLocaleString('vi-VN') }} {{accessoryOrder.currency}}</td>
                         </tr>
                     </tbody>
                 </table>

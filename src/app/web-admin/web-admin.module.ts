@@ -11,6 +11,7 @@ import { AddCustomerComponent } from './customer/add-customer/add-customer.compo
 import { EditCustomerComponent } from './customer/edit-customer/edit-customer.component';
 import { BookingComponent } from './booking/booking.component';
 import { BookingDetailComponent } from './booking/booking-detail/booking-detail.component';
+import { CustomerRevenueDetailComponent } from './statistics-revenue/customer-revenue-detail/customer-revenue-detail.component';
 
 const routers : Routes = [
   {
@@ -67,11 +68,18 @@ const routers : Routes = [
     data : {
       title : TitleConstants.HOME
     }
+  },
+  {
+    path : "customer-revenue-detail/:id",
+    component : CustomerRevenueDetailComponent,
+    data : {
+      title : TitleConstants.HOME
+    }
   }
 ]
 
 @NgModule({
-  declarations: [CustomerComponent, CarComponent, PaymentComponent, StatisticsRevenueComponent, AddCustomerComponent, EditCustomerComponent, BookingComponent, BookingDetailComponent],
+  declarations: [CustomerComponent, CarComponent, PaymentComponent, StatisticsRevenueComponent, AddCustomerComponent, EditCustomerComponent, BookingComponent, BookingDetailComponent, CustomerRevenueDetailComponent],
   imports: [
     CommonModule,
     SharedModule,

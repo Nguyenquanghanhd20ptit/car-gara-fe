@@ -48,6 +48,21 @@ export class PaymentDetailComponent implements OnInit {
     })
   }
   paymentWithMomo(){
+    let body = {
+      order_id : this.order.id,
+      redirect_url : "http://localhost:4200/admin/booking" 
+    }
+    this.orderService.paymentWithMomo(body).subscribe((data)=>{
+      if(data && data.error_code === "00"){
+        let value = JSON.parse(data.data);
+        let payUrl = value.pay_url;
+        window.location.href = payUrl;
+      } else if(data && data.error_message){
+        this.toastr.error(data.error_message);
+      } else {
+        this.toastr.error("thanh toan thất bại")
+      }
+    })
   }
   
 }

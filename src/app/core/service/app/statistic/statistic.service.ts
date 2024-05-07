@@ -27,4 +27,12 @@ export class StatisticService {
     )
   }
 
+  statisticRevenueCustomerDetail(id : number,body : any){
+    return this.http.post(`${this.baseUrl}/statistic/revenue/customer/${id}`,body).pipe(
+      map((data : any) =>{
+        return data;
+      })
+    )
+  }
+
 }

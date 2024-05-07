@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { StatisticService } from 'src/app/core/service/app/statistic/statistic.service';
 
@@ -22,6 +23,7 @@ export class StatisticsRevenueComponent implements OnInit {
   private searchTimeout: any;
   public openMenu: { [key: number]: boolean } = {};
   constructor(private elementRef: ElementRef,
+    private router : Router,
     private statisticService : StatisticService,
     private toastr : ToastrService,
     public datePipe: DatePipe,
@@ -72,7 +74,7 @@ export class StatisticsRevenueComponent implements OnInit {
         this.totalRevenue = pageResponse.total_revenue;
         this.statistics = pageResponse.items;
       } else if (data && data.error_message) {
-        this.statistics.error(data.error_message);
+        this.toastr.error(data.error_message);
       } else {
         this.toastr.error("Đã có lỗi sảy ra");
       }
@@ -114,7 +116,7 @@ export class StatisticsRevenueComponent implements OnInit {
   }
   
   
-  toggleMenu(index) {
+  toggleMenu(index : number) {
     this.statistics.forEach(statistic => {
       if(statistic.customer_id !== index){
         this.openMenu[statistic.customer_id] = false;
@@ -123,8 +125,8 @@ export class StatisticsRevenueComponent implements OnInit {
     this.openMenu[index] = !this.openMenu[index];
   }
   
-  edit(index) {
-    alert("edit" + index)
+  viewDetail(customerId : number) {
+    this.router.navigate(["/admin/customer-revenue-detail",customerId])
   }
 
   deleteItem(index) {

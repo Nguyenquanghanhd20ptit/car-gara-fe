@@ -1,0 +1,186 @@
+.cart-title{
+    text-align: center;
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 100px;
+    padding-bottom: 30px;
+}
+
+.back-previous-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #F2F8F5;
+    padding: 15px 20px;
+}
+
+.back-previous-title{
+    font-size: 16px; 
+}
+
+
+.submit-button{
+    border: none;
+    padding: 15px 30px;
+    font-size: 16px;
+    font-weight: 600;
+    background: none;
+}
+.submit-button i{
+    font-size: 20px;
+    color: #D10024;
+
+}
+.submit-button a:hover{
+    color: #D10024;
+}
+.object-info {
+    display: flex;
+    background-color: #FFF;
+    padding: 20px;
+    border: 1px solid #dbdbdd;
+    border-radius: 4px;
+    margin: 0 auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.object-info-title {
+    font-size: 18px;
+    margin-top: 20px;
+    margin-bottom: 5px;
+    margin-left: 20px;
+}
+
+.object-info img {
+    width: 250px;
+    height: 250px;
+    margin-left: 20px;
+    margin-top: 10px;
+    margin-right: 50px;
+    margin-bottom: 20px;
+    border-radius: 50%;
+  }
+
+  .customer-order-list {
+    background-color: #FFF;
+    padding: 20px;
+    border: 1px solid #dbdbdd;
+    border-radius: 4px;
+    margin: 0 auto;
+    margin-top: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.customer-order {
+    background-color: #FFF;
+    padding: 20px;
+    border: 1px solid #dbdbdd;
+    border-radius: 4px;
+    margin: 0 auto;
+    margin-top: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.orderItem_heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #dbdbdd;
+}
+
+.orderItem_codeOrder {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    color: #212121;
+}
+
+.orderItem_infoTransfer {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.orderItem_date {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #828282;
+}
+ .orderItem_status {
+    margin-bottom: 10px;
+    color: #006d33;
+    background: rgba(0, 109, 51, .1);
+}
+.car-info {
+    display: flex;
+    background-color: #FFF;
+    margin: 0 auto;
+    margin-top: 20px;
+    border-bottom: 1px solid #dbdbdd;
+}
+
+.car-info img {
+    width: 250px;
+    height: 250px;
+    margin-left: 20px;
+    margin-top: 10px;
+    margin-right: 50px;
+    margin-bottom: 20px;
+    border-radius: 50%;
+  }
+
+
+  .product-in-cart{
+    max-height: 471px;
+    border-radius: 4px;
+    font-size: 16px;
+    overflow: hidden auto; 
+    border-bottom: 1px solid #dbdbdd;
+}
+
+.product-count{
+    padding: 20px 0px;
+    font-size: 16px;
+}
+
+
+.ant-table-totalMoney{
+    color: #D10024;
+}
+.table-cell-nameProduct:hover{
+    color: #D10024;
+}
+
+.ant-table-cell{
+    padding: 16px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.ant-table-cell img{
+    max-width: 150px;
+    max-height: 150px;
+}
+
+.orderItem_total{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.orderItem_total p {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    text-transform: uppercase;
+}
+
+.orderItem_total span {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 30px;
+    color: #fb3e3e;
+}
